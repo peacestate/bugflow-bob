@@ -1,0 +1,66 @@
+{
+  "app": "ShopCart",
+  "description": "Tiny Python checkout service used as BugFlow benchmark target.",
+  "paths": {
+    "source": "shopcart/",
+    "tests": "tests/",
+    "issues": "issues/",
+    "logs": "logs/",
+    "docs": "docs/",
+    "scripts": "scripts/"
+  },
+  "policy_docs": {
+    "pricing":   "docs/pricing-policy.md",
+    "inventory": "docs/inventory.md",
+    "shipping":  "docs/shipping-sla.md"
+  },
+  "codeowners": "CODEOWNERS",
+  "bugs": [
+    {
+      "issue": "ISSUE-101",
+      "component": "pricing",
+      "source_file": "shopcart/pricing.py",
+      "symbol": "order_total",
+      "policy_doc": "docs/pricing-policy.md",
+      "log_request_id": "req-3c19a",
+      "owner": "@payments-team"
+    },
+    {
+      "issue": "ISSUE-102",
+      "component": "inventory",
+      "source_file": "shopcart/inventory.py",
+      "symbol": "Inventory.reserve",
+      "policy_doc": "docs/inventory.md",
+      "log_request_id": "req-7f3a2",
+      "owner": "@fulfillment-team"
+    },
+    {
+      "issue": "ISSUE-103",
+      "component": "shipping",
+      "source_file": "shopcart/shipping.py",
+      "symbol": "estimate_delivery",
+      "policy_doc": "docs/shipping-sla.md",
+      "log_request_id": "req-9b1e0",
+      "owner": "@fulfillment-team"
+    },
+    {
+      "issue": "ISSUE-104",
+      "component": "inventory",
+      "source_file": "shopcart/inventory.py",
+      "symbol": "Inventory.reserve",
+      "policy_doc": "docs/inventory.md",
+      "log_request_id": "req-a4d77",
+      "owner": "@fulfillment-team",
+      "note": "Duplicate root cause of ISSUE-102 — same bug, different SKU."
+    }
+  ],
+  "baseline_minutes": {
+    "triage_per_report": 20,
+    "context_per_bug":   45,
+    "reproduce_per_bug": 35,
+    "fix_per_bug":       25,
+    "verify_per_bug":    20,
+    "pr_per_bug":        15,
+    "total_per_bug":     160
+  }
+}

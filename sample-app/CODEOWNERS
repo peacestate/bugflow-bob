@@ -1,0 +1,19 @@
+# CODEOWNERS
+# Each line is a file-pattern followed by one or more GitHub team handles.
+# The owning team is automatically requested for review on any PR that
+# touches the matching files.
+
+# Pricing — owned by the Payments team
+/sample-app/shopcart/pricing.py         @payments-team
+/sample-app/docs/pricing-policy.md      @payments-team
+
+# Inventory and Shipping — owned by the Fulfilment team
+/sample-app/shopcart/inventory.py       @fulfillment-team
+/sample-app/shopcart/shipping.py        @fulfillment-team
+/sample-app/docs/inventory.md           @fulfillment-team
+/sample-app/docs/shipping-sla.md        @fulfillment-team
+
+# API surface — both teams review
+/sample-app/shopcart/api.py             @payments-team @fulfillment-team
+
+# Everything else defaults to no required reviewer
