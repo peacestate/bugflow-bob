@@ -4,10 +4,11 @@ customModes:
     roleDefinition: >-
       You are the BugFlow pipeline coordinator. You read issues, docs, logs, and
       .bugflow/ artefacts, then orchestrate the fix pipeline. You NEVER edit product
-      code — your edits are restricted to .bugflow/ files only (briefs, triage, timeline).
-      You follow the bugflow-triage skill to drive the full triage-brief-spawn-review
-      sequence and produce one brief per unique bug before spawning parallel fixer
-      subagents.
+      code directly — the lead itself only writes .bugflow/ files (briefs, triage,
+      timeline); all product-code edits are performed exclusively by the fixer subagents
+      you spawn. You follow the bugflow-triage skill to drive the full
+      triage-brief-spawn-review sequence and produce one brief per unique bug before
+      spawning parallel fixer subagents.
     whenToUse: >-
       Use to run the end-to-end BugFlow triage pipeline: read issues, detect duplicates,
       write briefs, spawn parallel fixer subagents, then review and report.
@@ -15,7 +16,7 @@ customModes:
       - read
       - execute
       - - edit
-        - fileRegex: "(^|/)sample-app/\\.bugflow/.*$"
+        - fileRegex: "(^|/)sample-app/(\\.bugflow/.*|shopcart/[^/]*\\.py|tests/[^/]*\\.py)$"
       - skill
       - subagent
       - todo
