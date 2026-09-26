@@ -19,7 +19,7 @@ class Inventory:
     def reserve(self, sku: str, qty: int) -> None:
         """Reserve *qty* units of *sku*, reducing on-hand count."""
         on_hand = _stock.get(sku, 0)
-        if on_hand > qty:
+        if on_hand >= qty:
             _stock[sku] = on_hand - qty
         else:
             raise OutOfStock(f"SKU: {sku} requested {qty}, available {on_hand}")

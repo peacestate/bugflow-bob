@@ -21,7 +21,7 @@ BASELINE_MINUTES: dict[str, float] = {
     "pr": 15.0,
 }
 
-BASELINE_TOTAL_PER_BUG = 160.0  # minutes (stages 2-7)
+BASELINE_TOTAL_PER_BUG = 140.0  # minutes (stages 2-7, excludes triage which is counted per report)
 
 
 def run_report(project: Path) -> None:

@@ -37,6 +37,18 @@ class TestOrderTotal(unittest.TestCase):
         result = order_total(Decimal("200.00"), "WA")
         self.assertEqual(result, Decimal("213.00"))
 
+    def test_issue_101_pricing_regression(self):
+        """Regression test for ISSUE-101: Customer charged one cent less than invoice amount.
+
+        ISSUE-101
+
+        A $10.00 item in CA (7.25% tax) produces $0.725 tax.
+        ROUND_HALF_UP must yield $0.73, giving a total of $10.73.
+        float conversion + banker's rounding wrongly returns $10.72.
+        """
+        result = order_total(Decimal("10.00"), "CA")
+        self.assertEqual(result, Decimal("10.73"))
+
 
 if __name__ == "__main__":
     unittest.main()

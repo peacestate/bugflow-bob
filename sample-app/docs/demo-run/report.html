@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BugFlow Report</title>
+<style>
+  body {font-family: -apple-system, "Segoe UI", sans-serif; max-width: 760px;
+         margin: 40px auto; padding: 0 20px; color: #1f2328; line-height: 1.6;}
+  h1 {border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;}
+  h2 {color: #3b82d4; margin-top: 32px;}
+  table {border-collapse: collapse; width: 100%; margin: 16px 0;}
+  th {background: #f7f8fa; text-align: left; padding: 8px 12px;
+       border: 1px solid #e5e7eb;}
+  td {padding: 8px 12px; border: 1px solid #e5e7eb;}
+  .metric {font-size: 2em; font-weight: bold; color: #3b82d4;}
+  .card {background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 6px;
+          padding: 16px; margin: 8px 0; display: inline-block; min-width: 140px;
+          text-align: center;}
+  .cards {display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0;}
+  footer {margin-top: 40px; border-top: 1px solid #e5e7eb; padding-top: 12px;
+           text-align: center; font-size: 12px; color: #57606a;}
+</style>
+</head>
+<body>
+<h1>BugFlow Session Report</h1>
+<div class="cards">
+  <div class="card"><div class="metric">4</div>Reports</div>
+  <div class="card"><div class="metric">3</div>Unique bugs</div>
+  <div class="card"><div class="metric">1</div>Duplicates resolved</div>
+  <div class="card"><div class="metric">3</div>Regression tests</div>
+  <div class="card"><div class="metric">4.0m</div>Wall-clock</div>
+  <div class="card"><div class="metric">123.8×</div>Speedup</div>
+</div>
+<h2>Stage Counts</h2>
+<table><tr><th>Stage</th><th>Count</th></tr><tr><td>brief</td><td>3</td></tr><tr><td>fix</td><td>3</td></tr><tr><td>pr</td><td>3</td></tr><tr><td>reproduce</td><td>3</td></tr><tr><td>triage</td><td>1</td></tr><tr><td>verify:passed</td><td>3</td></tr></table>
+<footer>Made with IBM Bob</footer>
+</body>
+</html>

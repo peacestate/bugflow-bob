@@ -25,9 +25,20 @@ class TestEstimateDelivery(unittest.TestCase):
         self.assertEqual(result, date(2024, 6, 8))
 
     def test_unknown_region_raises(self):
-        """A completely unknown region key raises KeyError (bug aside)."""
-        with self.assertRaises(KeyError):
+        """An unknown region key raises ValueError (Rule S-3)."""
+        with self.assertRaises(ValueError):
             estimate_delivery("ap-southeast", date(2024, 6, 3))
+
+    def test_issue_103_shipping_regression(self):
+        """Regression test for ISSUE-103: Checkout 500 error from web storefront — region lookup failure.
+
+        ISSUE-103
+        """
+        ship = date(2024, 6, 4)
+        # Rule S-1: all three casing variants must resolve to 2 days transit
+        self.assertEqual(estimate_delivery("US-East", ship), date(2024, 6, 6))
+        self.assertEqual(estimate_delivery("US-EAST", ship), date(2024, 6, 6))
+        self.assertEqual(estimate_delivery("us-east", ship), date(2024, 6, 6))
 
     def test_all_canonical_regions_present(self):
         """All canonical region keys are registered in the lookup table."""

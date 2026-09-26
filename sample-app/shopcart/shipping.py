@@ -12,5 +12,8 @@ REGION_TRANSIT_DAYS: dict[str, int] = {
 
 def estimate_delivery(region: str, ship_date: date) -> date:
     """Return the estimated delivery date for the given region."""
-    days = REGION_TRANSIT_DAYS[region]
+    try:
+        days = REGION_TRANSIT_DAYS[region.lower()]
+    except KeyError:
+        raise ValueError(f"Unknown shipping region: {region!r}")
     return ship_date + timedelta(days=days)

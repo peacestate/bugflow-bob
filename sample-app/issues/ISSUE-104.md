@@ -40,3 +40,5 @@ Quantity requested: `1`
 Quantity reported available: `1`  
 Customer tier: Gold VIP  
 Campaign: "AirEdge Pro Drop — Exclusive Early Access"
+
+Duplicate of ISSUE-102 (closed by the ISSUE-102 fix).

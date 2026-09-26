@@ -120,12 +120,12 @@ class TestTriage(unittest.TestCase):
         self.assertIn("pricing.py", sf,
                       f"Expected pricing.py suspect for ISSUE-101, got '{sf}'")
 
-    def test_issue_101_suspect_line_is_round_float(self):
-        """ISSUE-101 suspect must be the faulty return statement, not a comment or docstring.
+    def test_issue_101_suspect_line_is_return_statement(self):
+        """ISSUE-101 suspect must be the return statement in order_total, not a comment.
 
-        The buggy line is `return Decimal(str(round(float(total), 2)))`.
-        After BUG-hint removal the triage must still find this line, not any
-        comment or docstring that used to describe it.
+        After the demo-run fix, pricing.py returns
+        `total.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)`.
+        Triage must still find this line (the only candidate return in order_total).
         """
         self._run_triage()
         triage_path = self.project / ".bugflow" / "triage.json"
@@ -134,8 +134,10 @@ class TestTriage(unittest.TestCase):
         suspect = all_issues["ISSUE-101"].get("suspect")
         self.assertIsNotNone(suspect, "ISSUE-101 should have a suspect")
         line = suspect.get("line", "")
-        self.assertIn("round(float(", line,
-                      f"Expected suspect line to contain 'round(float(' but got: {line!r}")
+        self.assertIn("return", line,
+                      f"Expected suspect line to be a return statement but got: {line!r}")
+        self.assertIn("total", line,
+                      f"Expected suspect line to reference 'total' but got: {line!r}")
 
     def test_triage_md_written(self):
         self._run_triage()
@@ -270,11 +272,17 @@ class TestVerify(unittest.TestCase):
     def test_gate_blocked_without_regression_tests(self):
         """Without any regression tests the gate is BLOCKED."""
         from bugflow.verify import run_verify
+        # Remove any existing regression tests so the gate sees a clean slate
+        for tf in (self.project / "tests").glob("test_*.py"):
+            tf.unlink()
         passed = run_verify(self.project)
         self.assertFalse(passed, "Gate should be BLOCKED without regression tests")
 
     def test_gate_blocked_specific_issue(self):
         from bugflow.verify import run_verify
+        # Remove any existing regression tests so the gate sees a clean slate
+        for tf in (self.project / "tests").glob("test_*.py"):
+            tf.unlink()
         passed = run_verify(self.project, issue_id="ISSUE-101")
         self.assertFalse(passed)
 

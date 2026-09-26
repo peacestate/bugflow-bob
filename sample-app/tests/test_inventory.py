@@ -36,6 +36,16 @@ class TestInventoryReserve(unittest.TestCase):
         # Reserve 3 more — 10-3 = 7 remain, 3 < 7 so this should work.
         self.inv.reserve("SKU-001", 3)
 
+    def test_issue_102_inventory_regression(self):
+        """Regression test for ISSUE-102: ISSUE-102: Customer cannot buy the last unit of a product.
+
+        ISSUE-102
+        """
+        seed_stock({"SKU-778": 1})
+        inv = Inventory()
+        # Must NOT raise OutOfStock — the last unit must be purchasable (Rule I-1)
+        inv.reserve("SKU-778", 1)
+
 
 if __name__ == "__main__":
     unittest.main()

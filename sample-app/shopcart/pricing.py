@@ -16,4 +16,4 @@ def order_total(subtotal: Decimal, state: str) -> Decimal:
     rate = TAX_RATES.get(state, Decimal("0"))
     tax = subtotal * rate
     total = subtotal + tax
-    return Decimal(str(round(float(total), 2)))
+    return total.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
