@@ -50,7 +50,7 @@ bugflow-bob/
 │   └── skills/             ← bugflow-triage, bugflow-fix, bugflow skills
 │
 ├── tests/                  ← unit tests for the bugflow/ toolkit itself
-└── bob_sessions/           ← session logs from all 7 tasks (tasks 01–07)
+└── bob_sessions/           ← session logs from all 8 tasks (tasks 01–08); extra_*.png files are screenshots from the demo recording
 ```
 
 ---
@@ -149,21 +149,22 @@ Committed demo artifacts are in [`sample-app/docs/demo-run/`](sample-app/docs/de
 
 ## Built with IBM Bob
 
-The entire project was built in IBM Bob 2.0 across 7 sessions, all logged in [`bob_sessions/`](bob_sessions/).
+The entire project was built in IBM Bob 2.0 across 8 sessions, all logged in [`bob_sessions/`](bob_sessions/).
 
 | Task | Session | What happened |
 |---|---|---|
 | 01 | [`task01_plan_and_sample_app.md`](bob_sessions/task01_plan_and_sample_app.md) | Wrote PROBLEM.md; scaffolded `sample-app/` with seeded bugs, issues, logs, policy docs |
 | 02 | [`task02_bugflow_toolkit.md`](bob_sessions/task02_bugflow_toolkit.md) | Built the entire `bugflow/` CLI toolkit (triage, brief, log, verify, pr, report) — stdlib-only |
 | 03 | [`task03_bob_modes_skills.md`](bob_sessions/task03_bob_modes_skills.md) | Wrote `.bob/` config: custom modes, rules, skills, `/bugflow` slash command |
-| 04 | [`task04_commit_and_push.md`](bob_sessions/task04_commit_and_push.md) | Committed the full repo, ran all tests, pushed to main |
+| 04 | [`task04_commit_and_push.md`](bob_sessions/task04_commit_and_push.md) | Committed `.bob/` and `bob_sessions/` and pushed to main (no test run) |
 | 05 | [`task05_first_demo_run_failed.md`](bob_sessions/task05_first_demo_run_failed.md) | **First `/bugflow` run failed** — fixer subagents inherited lead's restricted edit permissions and could not write to `shopcart/` or `tests/`. One subagent fell back to shell edits, leaving pricing.py half-changed. |
 | 06 | [`task06_fix_permissions_and_reset.md`](bob_sessions/task06_fix_permissions_and_reset.md) | Bob diagnosed the permission inheritance issue, reset the demo (`git checkout -- sample-app`), and fixed `custom_modes.yaml` to expand `bugflow-lead`'s `fileRegex` to include `shopcart/*.py` and `tests/*.py` |
 | 07 | [`task07_demo_run_parallel_fixers.md`](bob_sessions/task07_demo_run_parallel_fixers.md) | Successful `/bugflow` run — Bob spawned 3 parallel fixer subagents, each wrote a failing regression test first, then applied the minimal fix, verified, and drafted a PR. All 3 bugs fixed in 4 min wall-clock. |
+| 08 | [`task08_wrapup_readme_report.md`](bob_sessions/task08_wrapup_readme_report.md) | Fixed the baseline math (500 min, 123.8x), corrected ISSUE-104 wording, copied demo-run artifacts to `sample-app/docs/demo-run/`, wrote this README, updated tests |
 
 The failed first run (task 05) and the self-correction (task 06) are kept in `bob_sessions/`
-deliberately — they demonstrate how Bob identifies and recovers from a configuration mistake
-without human intervention beyond the initial problem description.
+deliberately — they demonstrate how Bob identifies and recovers from a configuration mistake;
+the developer spotted the blocked fixer and described the cause; Bob then reset the demo and fixed the mode configuration.
 
 ---
 
